@@ -12,7 +12,7 @@ const runPrompt = async () => {
   const completion = await openai.chat.completions.create({
     messages: [{ role: "system", content: "Tell me a joke" }],
     model: "gpt-3.5-turbo",
-    max_tokens: 2000,
+    max_tokens: 2040,
     temperature: 1,
   });
 
