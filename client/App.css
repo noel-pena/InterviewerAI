@@ -7,11 +7,24 @@ body {
   color: rgb(215, 215, 215);
 }
 
+h1 {
+  font-weight: 400;
+  font-size: 3rem;
+  letter-spacing: 0.25rem;
+  text-align: center;
+}
+
+h2 {
+  font-weight: 200;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
 .AI {
-  background: linear-gradient(0deg, #589f55, #647c61);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  background: linear-gradient(0deg, #589f55, #647c61) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
 }
 
 .animated-button {
@@ -116,4 +129,47 @@ body {
   .footer-icons {
     padding: 30px;
   }
+}
+.line2 {
+  border-top: 1px;
+  border-color: rgba(212, 212, 212, 0.359);
+  margin-top: 20px;
+}
+.input {
+  border: none;
+  padding: 1.5rem;
+  margin-right: 15px;
+  width: 75vw;
+  border-radius: 10px;
+  background: #d3d3d3;
+  transition: 0.3s;
+}
+
+.input:focus {
+  outline-color: #d3d3d3;
+  background: #d3d3d3;
+  box-shadow: inset 20px 20px 60px #c5c5c52b,
+    inset -20px -20px 60px rgba(255, 255, 255, 0.102); /* Fix typo here */
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+.input-container {
+  position: relative;
+}
+
+.svg-icon {
+  position: absolute;
+  padding: 2px;
+  color: #212121;
+  top: 50%; /* Adjust as needed */
+  right: 15px; /* Adjust as needed */
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.svg-icon:hover {
+  background-color: #21212176;
+  padding: 2px;
+  border-radius: 5px;
 }

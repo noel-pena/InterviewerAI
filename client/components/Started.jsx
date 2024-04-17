@@ -2,14 +2,13 @@ import { useState } from "react";
 import { Title } from "./subcomponents/Title";
 import { ModernButton } from "./subcomponents/ModernButton";
 import { Grid } from "@mui/material";
+import { TextBox } from "./subcomponents/TextBox";
 
 export const Started = () => {
   const [buttonClicked, setButtonClicked] = useState(false);
-  const [justifyContent, setJustifyContent] = useState("center");
 
   const handleButtonClick = () => {
     setButtonClicked(true);
-    setJustifyContent(null);
   };
 
   return (
@@ -18,24 +17,22 @@ export const Started = () => {
       gap={5}
       flexDirection="column"
       sx={{
-        justifyContent: justifyContent,
+        justifyContent: buttonClicked ? "space-between" : "center",
         alignItems: "center",
         height: "100vh",
       }}
     >
+      <Grid item>
+        <Title />
+      </Grid>
       {buttonClicked ? (
-        <Grid item>
-          <Title />
+        <Grid item pb={5}>
+          <TextBox />
         </Grid>
       ) : (
-        <>
-          <Grid Item>
-            <Title />
-          </Grid>
-          <Grid Item>
-            <ModernButton onClick={handleButtonClick} />
-          </Grid>
-        </>
+        <Grid item>
+          <ModernButton onClick={handleButtonClick} />
+        </Grid>
       )}
     </Grid>
   );
