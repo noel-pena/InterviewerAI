@@ -8,16 +8,50 @@ body {
 }
 
 h1 {
+  padding-top: 25px;
   font-weight: 400;
-  font-size: 3rem;
+  font-size: 1.5rem;
   letter-spacing: 0.25rem;
+  overflow: hidden;
   text-align: center;
+  white-space: nowrap;
+  animation: typing 1.5s steps(40, end), blink-caret 0.75s step-end infinite;
 }
 
 h2 {
   font-weight: 200;
-  font-size: 1.5rem;
+  font-size: 1rem;
   text-align: center;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@media (min-width: 600px) {
+  h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 600px) {
+  h2 {
+    font-size: 1.5rem;
+  }
 }
 
 .AI {
@@ -25,6 +59,22 @@ h2 {
   -webkit-background-clip: text !important;
   background-clip: text !important;
   color: transparent !important;
+}
+
+.output {
+  font-size: 1.5rem;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 7rem;
+  font-weight: 200;
+}
+
+@media (max-width: 400px) {
+  .output {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 1rem;
+  }
 }
 
 .animated-button {
@@ -137,12 +187,25 @@ h2 {
 }
 .input {
   border: none;
-  padding: 1.5rem;
+  padding: 1rem;
+  margin: -1.5rem;
   margin-right: 15px;
   width: 75vw;
   border-radius: 10px;
   background: #d3d3d3;
   transition: 0.3s;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+@media (max-width: 400px) {
+  .input {
+    margin-left: 15px;
+    padding-right: 45px;
+    font-size: 1rem;
+  }
 }
 
 .input:focus {
@@ -156,20 +219,54 @@ h2 {
 
 .input-container {
   position: relative;
+  padding-bottom: 3rem;
 }
 
+@media (max-width: 400px) {
+  .input-container {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+
+    z-index: 1;
+  }
+}
 .svg-icon {
   position: absolute;
-  padding: 2px;
+  margin-right: 5px;
   color: #212121;
-  top: 50%; /* Adjust as needed */
+  top: 20%; /* Adjust as needed */
   right: 15px; /* Adjust as needed */
   transform: translateY(-50%);
   cursor: pointer;
 }
 
+@media (max-width: 400px) {
+  .svg-icon {
+    top: 40%;
+    font-size: small;
+  }
+}
+
 .svg-icon:hover {
-  background-color: #21212176;
-  padding: 2px;
-  border-radius: 5px;
+  background-color: #21212125;
+  border-radius: 50px;
+}
+
+::placeholder {
+  font-size: 1rem;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+}
+
+@media (max-width: 400px) {
+  ::placeholder {
+    font-size: 0.75rem;
+  }
+}
+
+textarea {
+  max-height: 75% !important;
+  resize: none;
+  overflow: hidden;
 }
