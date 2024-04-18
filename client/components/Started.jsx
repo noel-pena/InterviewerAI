@@ -15,14 +15,12 @@ export const Started = () => {
       setButtonClicked(true);
       setIsLoading(false);
     }, 1000);
-
-    // You can replace the setTimeout with your actual data fetching logic
   };
 
   return (
     <Grid
       container
-      gap={5}
+      gap={3}
       flexDirection="column"
       sx={{
         justifyContent: buttonClicked ? "space-between" : "center",

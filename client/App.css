@@ -235,7 +235,7 @@ h2 {
   position: absolute;
   margin-right: 5px;
   color: #212121;
-  top: 20%; /* Adjust as needed */
+  top: 17%; /* Adjust as needed */
   right: 15px; /* Adjust as needed */
   transform: translateY(-50%);
   cursor: pointer;
@@ -243,14 +243,14 @@ h2 {
 
 @media (max-width: 400px) {
   .svg-icon {
-    top: 40%;
+    top: 35%;
     font-size: small;
   }
 }
 
 .svg-icon:hover {
   background-color: #21212125;
-  border-radius: 50px;
+  border-radius: 5px;
 }
 
 ::placeholder {
@@ -266,7 +266,6 @@ h2 {
 }
 
 textarea {
-  max-height: 75% !important;
   resize: none;
   overflow: hidden;
 }
