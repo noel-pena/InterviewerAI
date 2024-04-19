@@ -227,7 +227,6 @@ h2 {
     position: fixed;
     bottom: 0;
     right: 0;
-
     z-index: 1;
   }
 }
@@ -235,22 +234,23 @@ h2 {
   position: absolute;
   margin-right: 5px;
   color: #212121;
-  top: 17%; /* Adjust as needed */
-  right: 15px; /* Adjust as needed */
+  top: 20%; /* Adjust as needed */
+  right: 3%; /* Adjust as needed */
   transform: translateY(-50%);
   cursor: pointer;
+  transition: color 0.4s ease-in-out !important;
 }
 
 @media (max-width: 400px) {
   .svg-icon {
-    top: 35%;
+    top: 31%;
+    left: 87%;
     font-size: small;
   }
 }
 
 .svg-icon:hover {
-  background-color: #21212125;
-  border-radius: 5px;
+  color: #589f55;
 }
 
 ::placeholder {
