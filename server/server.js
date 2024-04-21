@@ -1,9 +1,14 @@
 /* eslint-disable no-undef */
+import express from "express";
 import dotenv from "dotenv";
 import OpenAI from "openai";
+
 // import readline from "readline";
 
 dotenv.config();
+
+app.use(express.json());
+// app.use(bodyParser.urlencoded({ extended: true }))
 
 const apiKey = process.env.OPENAI_API_KEY;
 
@@ -23,6 +28,16 @@ const userInterface = async (userInput) => {
     return "Error generating response";
   }
 };
+
+app.get("api/get", async (req, res) => {
+  try {
+    userInterface();
+    console.log(userInterface());
+  } catch (error) {
+    console.log("Error fetching OpenAI response: ", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
 // Node usage
 // const userInterface = readline.createInterface({
