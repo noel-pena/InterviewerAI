@@ -7,10 +7,10 @@ export const AI = () => {
   useEffect(() => {
     const fetchInitialQuestion = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/initial_question", {
+        const res = await axios.get("http://localhost:8000/initial_question", {
           withCredentials: false,
         });
-        setInitialQuestion(res.data).initial_question;
+        setInitialQuestion(res.data.initial_question);
         console.log(`res: ${JSON.stringify(res.data)}`);
       } catch (error) {
         console.error("Error fetching initial question:", error);

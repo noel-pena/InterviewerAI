@@ -1,3 +1,4 @@
+import token
 import openai
 from dotenv import load_dotenv
 import os
@@ -73,8 +74,9 @@ def userInterface(input):
       {"role": "system", "content": f"You are a helpful assistant who will play the role of interviewer and respond back to the user with feedback to their response to better their interviewing skills. Ask the following question: ${initialQuestion}"},
       {"role": "user", "content": input}
     ],
-    max_tokens= 150,
+    max_tokens= 15,
     temperature= 0.1,
+    
   )
   
   feedback = completion.choices[0].message.content
