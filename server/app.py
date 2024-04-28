@@ -1,6 +1,11 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
-from openaiAPI import getRandomQuestion, userInterface, initialQuestion
+from openaiAPI import getRandomQuestion, userInterface
+import os
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
@@ -23,6 +28,8 @@ def get_feedback():
         return jsonify({"error": str(e)})
 
 if __name__ == '__main__':
-    app.run(debug=True,port=8000)
+    host = os.getenv("FLASK_RUN_HOST", "127.0.0.1")
+    port = int(os.getenv("FLASK_RUN_PORT", 8000))
+    app.run(host=host, port=port)
 
 # flask run --host=0.0.0.0 --port=8000
