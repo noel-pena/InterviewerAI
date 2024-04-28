@@ -1,6 +1,7 @@
 import { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { SendButton } from "./SendButton";
+import axios from "axios";
 
 export const TextBox = () => {
   const [text, setText] = useState("");
@@ -12,6 +13,17 @@ export const TextBox = () => {
     inputValue.length <= maxCharLimit
       ? setText(inputValue)
       : setText(truncatedValue);
+  };
+
+  const handleSendClick = async () => {
+    try {
+      const res = await axios.post("http://localhost:8000/feedback", {
+        user_input: text,
+      });
+      console.log("Feedback:", res.data.feedback);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
   return (
@@ -35,7 +47,7 @@ export const TextBox = () => {
         value={text}
         onChange={handleInputChange}
       />
-      <SendButton onClick={null} />
+      <SendButton onClick={handleSendClick} />
     </div>
   );
 };
