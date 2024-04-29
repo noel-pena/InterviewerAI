@@ -11,7 +11,6 @@ export const AI = () => {
           withCredentials: false,
         });
         setInitialQuestion(res.data.initial_question);
-        console.log(`res: ${JSON.stringify(res.data)}`);
       } catch (error) {
         console.error("Error fetching initial question:", error);
       }

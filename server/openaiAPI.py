@@ -61,22 +61,16 @@ def getRandomQuestion():
 
 initialQuestion = getRandomQuestion()
 
-def userInterface():
+def userInterface(user_input):
     completion = openai.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": f"You are a helpful assistant who will play the role of interviewer and respond back to the user with feedback to their response to better their interviewing skills. Ask the following question: ${initialQuestion}"},
-            # {"role": "user", "content": ""}
+            {"role": "user", "content": user_input}
         ],
         max_tokens=15,
         temperature=0.1,
     )
     feedback = completion.choices[0].message.content
     print(feedback)
-
-def main():
-    # print(f"AI question: {initialQuestion}")
-    # user_input = input("Your response: ")
-    userInterface()
-
-main()
+    return feedback

@@ -22,10 +22,14 @@ def get_feedback():
     try:
         data = request.get_json()
         user_input = data.get('user_input')
+        print("Received user input:", user_input)
         feedback = userInterface(user_input)
+        print("Generated feedback:", feedback)
         return jsonify({"feedback": feedback})
     except Exception as e:
         return jsonify({"error": str(e)})
+
+
 
 if __name__ == '__main__':
     host = os.getenv("FLASK_RUN_HOST", "127.0.0.1")
