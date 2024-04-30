@@ -3,7 +3,8 @@ import TextareaAutosize from "react-textarea-autosize";
 import { SendButton } from "./SendButton";
 import axios from "axios";
 
-export const TextBox = () => {
+// eslint-disable-next-line react/prop-types
+export const TextBox = ({ onFeedback }) => {
   const [text, setText] = useState("");
   const maxCharLimit = 400;
 
@@ -20,8 +21,8 @@ export const TextBox = () => {
       const res = await axios.post("http://localhost:8000/feedback", {
         user_input: text,
       });
-      console.log("Response:", res.data);
-      console.log("Feedback:", res.data.feedback);
+      const feedback = res.data.feedback;
+      onFeedback(feedback);
       setText("");
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -56,6 +57,7 @@ export const TextBox = () => {
             }
           }}
         />
+
         <SendButton onClick={handleSendClick} />
       </form>
     </div>

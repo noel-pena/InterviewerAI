@@ -8,6 +8,7 @@ import { TextBox } from "./subcomponents/TextBox";
 export const Started = () => {
   const [buttonClicked, setButtonClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [feedback, setFeedback] = useState("");
 
   const handleButtonClick = () => {
     setIsLoading(true);
@@ -15,6 +16,10 @@ export const Started = () => {
       setButtonClicked(true);
       setIsLoading(false);
     }, 1000);
+  };
+
+  const handleFeedback = (feedback) => {
+    setFeedback(feedback);
   };
 
   return (
@@ -32,16 +37,14 @@ export const Started = () => {
         <Title />
       </Grid>
       {isLoading ? (
-        <Grid item>
-          <CircularProgress color="success" />
-        </Grid>
+        <CircularProgress color="success" size={60} />
       ) : buttonClicked ? (
         <>
           <Grid item className="output" textAlign="center">
-            <AI />
+            <AI feedback={feedback} />
           </Grid>
           <Grid item pb={5}>
-            <TextBox />
+            <TextBox onFeedback={handleFeedback} />
           </Grid>
         </>
       ) : (

@@ -1,7 +1,9 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Typewriter } from "./subcomponents/Typewriter";
 
-export const AI = () => {
+export const AI = ({ feedback }) => {
   const [initialQuestion, setInitialQuestion] = useState("");
 
   useEffect(() => {
@@ -20,7 +22,8 @@ export const AI = () => {
 
   return (
     <>
-      <p>{initialQuestion}</p>
+      <Typewriter text={"   " + initialQuestion} />
+      <Typewriter style={{ color: "#589f55" }} text={"  " + feedback} />
     </>
   );
 };
