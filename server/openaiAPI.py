@@ -1,4 +1,3 @@
-import token
 import openai
 from dotenv import load_dotenv
 import os
@@ -65,7 +64,7 @@ def userInterface(user_input):
     completion = openai.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": f"You are a helpful assistant who will play the role of interviewer and respond back to the user with feedback to their response to better their interviewing skills and avoiding asking followup questions. Ask the following question: ${initialQuestion}"},
+            {"role": "system", "content": f"You are a helpful assistant who will play the role of interviewer and respond back to the user with feedback to their response to better their interviewing skills. Do not ask followup questions, only provide feedback. Ask the following question: ${initialQuestion}"},
             {"role": "user", "content": user_input}
         ],
         max_tokens=2040,

@@ -27,7 +27,9 @@ def get_feedback():
     except Exception as e:
         return jsonify({"error": str(e)})
 
-
+@app.route('/clear_feedback', methods=['DELETE'])
+def clear_feedback():
+    return jsonify({"message": "Feedback cleared successfully."})
 
 if __name__ == '__main__':
     host = os.getenv("FLASK_RUN_HOST", "127.0.0.1")
