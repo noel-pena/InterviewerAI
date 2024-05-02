@@ -3,7 +3,10 @@ export const Title = () => {
     <>
       <a
         href="/"
-        style={{ textDecoration: "none", color: "rgb(215, 215, 215)" }}
+        style={{
+          textDecoration: "none",
+          color: "rgb(215, 215, 215)",
+        }}
       >
         <h1>
           Interviewer<span className="AI">AI</span>

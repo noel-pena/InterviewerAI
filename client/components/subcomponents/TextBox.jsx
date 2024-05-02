@@ -4,8 +4,10 @@ import { SendButton } from "./SendButton";
 import axios from "axios";
 
 // eslint-disable-next-line react/prop-types
-export const TextBox = ({ onFeedback }) => {
+export const TextBox = ({ onFeedback, onUserInput }) => {
   const [text, setText] = useState("");
+  const [userInputs, setUserInputs] = useState([]);
+
   const maxCharLimit = 400;
 
   const handleInputChange = (e) => {
@@ -16,13 +18,24 @@ export const TextBox = ({ onFeedback }) => {
       : setText(truncatedValue);
   };
 
+  const addToUserInputs = () => {
+    setUserInputs((prevInputs) => {
+      const updatedInputs = [...prevInputs, text]; // Append the input value to the array
+      console.log("Updated userInputs:", updatedInputs); // Log the updated array
+      return updatedInputs;
+    });
+  };
+
   const handleSendClick = async () => {
     try {
+      addToUserInputs();
       const res = await axios.post("http://localhost:8000/feedback", {
         user_input: text,
       });
+
       const feedback = res.data.feedback;
-      onFeedback(feedback);
+      onFeedback(feedback, text);
+      onUserInput(userInputs.concat(text)); // Issue might be here
       setText("");
     } catch (error) {
       console.error("Error fetching data:", error);

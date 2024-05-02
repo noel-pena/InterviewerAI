@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
-from openaiAPI import getRandomQuestion, userInterface
+from openaiAPI import getRandomQuestion, userInterface, techQuestions, interviewQuestions
 import os
 from dotenv import load_dotenv
 
@@ -16,6 +16,12 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def get_initial_question():
     initial_question = getRandomQuestion()
     return jsonify({"initial_question": initial_question})
+
+@app.route('/iq_js', methods=['GET'])
+@cross_origin()
+def get_initial_jsquestion():
+    javaScript = techQuestions[0]
+    return jsonify({"initial_question": javaScript})
 
 @app.route('/feedback', methods=['POST'])
 def get_feedback():

@@ -54,6 +54,8 @@ interviewQuestions = [
   "What are your salary expectations?",
 ]
 
+techQuestions = ["Javascript", "SQL", "Computer Science", "React.js", "Python", "Java", "data structures" ]
+
 def getRandomQuestion():
   randomQuestion = random.choice(interviewQuestions)
   return randomQuestion
@@ -61,14 +63,27 @@ def getRandomQuestion():
 initialQuestion = getRandomQuestion()
 
 def userInterface(user_input):
-    completion = openai.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": f"You are a helpful assistant who will play the role of interviewer and respond back to the user with feedback to their response to better their interviewing skills. Do not ask followup questions, only provide feedback. Ask the following question: ${initialQuestion}"},
-            {"role": "user", "content": user_input}
-        ],
-        max_tokens=2040,
-        temperature=0.1,
-    )
-    feedback = completion.choices[0].message.content
-    return feedback
+  completion = openai.chat.completions.create(
+      model="gpt-3.5-turbo",
+      messages=[
+          {"role": "system", "content": f"You are a helpful assistant who will play the role of interviewer and respond back to the user with feedback to their response to better their interviewing skills. Do not ask followup questions, only provide feedback. Ask the following question: ${initialQuestion}"},
+          {"role": "user", "content": user_input}
+      ],
+      max_tokens=2040,
+      temperature=0.1,
+  )
+  feedback = completion.choices[0].message.content
+  return feedback
+
+def userInterfacejs(user_input):
+  completion = openai.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[
+      {"role": "system", "content": f"You are a helpful assistant who will play the role of interviewer and respond back to the user with feedback to their response to better their interviewing skills. Do not ask followup questions, only provide feedback. Start with a random the {techQuestions[0]}  question" },
+      {"role": "user", "content": user_input}
+    ],
+    max_tokens=2040,
+    temperature=0.1
+  )
+  feedback = completion.choices[0].message.content
+  return feedback
