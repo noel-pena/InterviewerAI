@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 
-const useTypewriter = (text, speed = 5) => {
+const useTypewriter = (text, speed = 15) => {
   const [displayText, setDisplayText] = useState("");
 
   useEffect(() => {

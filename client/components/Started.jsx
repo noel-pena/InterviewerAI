@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Title } from "./subcomponents/Title";
 import { AI } from "./AI";
 import { ModernButton } from "./subcomponents/ModernButton";
@@ -10,6 +10,15 @@ export const Started = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [feedback, setFeedback] = useState("");
   const [userInputs, setUserInputs] = useState([]);
+
+  const gridRef = useRef(null);
+
+  const scrollToBottom = () => {
+    if (gridRef.current) {
+      const gridContainer = gridRef.current;
+      gridContainer.scrollTop = gridContainer.scrollHeight;
+    }
+  };
 
   const handleButtonClick = () => {
     setIsLoading(true);
@@ -24,31 +33,50 @@ export const Started = () => {
     setUserInputs((prevUserInputs) => [...prevUserInputs, text]);
   };
 
+  useEffect(() => {
+    scrollToBottom();
+  }, [feedback, userInputs]);
+
   const handleUserInputs = () => {};
   return (
     <Grid
       container
-      gap={3}
+      gap={10}
       flexDirection="column"
       sx={{
-        justifyContent: buttonClicked ? "space-around" : "center",
+        justifyContent: buttonClicked ? "space-between" : "center",
         alignItems: "center",
-        height: "100vh",
+        minHeight: "100vh",
+        flex: 1,
+        overflow: "hidden",
       }}
     >
-      <Grid item>
+      <Grid item sx={{ maxHeight: buttonClicked ? "5vh" : "0" }}>
         <Title />
       </Grid>
       {isLoading ? (
         <CircularProgress color="success" size={40} />
       ) : buttonClicked ? (
         <>
-          <Grid item className="output" textAlign="center">
+          <Grid
+            item
+            p={0}
+            className="output"
+            textAlign="center"
+            sx={{
+              height: "75vh",
+              maxHeight: "calc(75vh - 120px)",
+              overflowY: "auto",
+              width: "100%",
+              "&::-webkit-scrollbar": {
+                display: "none",
+              },
+              scrollbarWidth: "none",
+            }}
+            ref={gridRef}
+          >
             <AI feedback={feedback} userInputs={userInputs} />
           </Grid>
-          {/* <Grid item pb={5}>
-            {feedback && <NextButton onClick={handleNextClick} />}
-          </Grid> */}
           <Grid item pt={5}>
             <TextBox
               onFeedback={handleFeedback}

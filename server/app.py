@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
-from openaiAPI import getRandomQuestion, userInterface, techQuestions, interviewQuestions
+from openaiAPI import userInterface
 import os
 from dotenv import load_dotenv
 
@@ -14,14 +14,11 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @app.route('/initial_question', methods=['GET'])
 @cross_origin()
 def get_initial_question():
-    initial_question = getRandomQuestion()
-    return jsonify({"initial_question": initial_question})
-
-@app.route('/iq_js', methods=['GET'])
-@cross_origin()
-def get_initial_jsquestion():
-    javaScript = techQuestions[0]
-    return jsonify({"initial_question": javaScript})
+    try:
+        feedback = userInterface("")  # Provide an empty user input to trigger AI to generate an initial question
+        return jsonify({"initial_question": feedback})
+    except Exception as e:
+        return jsonify({"error": str(e)})
 
 @app.route('/feedback', methods=['POST'])
 def get_feedback():
@@ -33,13 +30,7 @@ def get_feedback():
     except Exception as e:
         return jsonify({"error": str(e)})
 
-@app.route('/clear_feedback', methods=['DELETE'])
-def clear_feedback():
-    return jsonify({"message": "Feedback cleared successfully."})
-
 if __name__ == '__main__':
     host = os.getenv("FLASK_RUN_HOST", "127.0.0.1")
     port = int(os.getenv("FLASK_RUN_PORT", 8000))
     app.run(host=host, port=port)
-
-# flask run --host=0.0.0.0 --port=8000

@@ -5,51 +5,64 @@ import { Typewriter } from "./subcomponents/Typewriter";
 
 export const AI = ({ feedback, userInputs }) => {
   const [initialQuestion, setInitialQuestion] = useState("");
-  const [responseArray, setResponseArray] = useState([]);
+  const [combinedArray, setCombinedArray] = useState([]);
 
   // Fetch initial question and set initial state
+  const fetchInitialQuestion = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/initial_question", {
+        withCredentials: false,
+      });
+      setInitialQuestion(res.data.initial_question);
+    } catch (error) {
+      console.error("Error fetching initial question:", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchInitialQuestion = async () => {
-      try {
-        const res = await axios.get("http://localhost:8000/initial_question", {
-          withCredentials: false,
-        });
-        setInitialQuestion(res.data.initial_question);
-      } catch (error) {
-        console.error("Error fetching initial question:", error);
-      }
-    };
     fetchInitialQuestion();
   }, []);
 
-  // Update response array when feedback changes
+  // Combine userInputs and responseArray
   useEffect(() => {
     if (feedback) {
-      setResponseArray((prevResponses) => [...prevResponses, feedback]);
+      setCombinedArray((prevCombined) => [
+        ...prevCombined,
+        { content: userInputs[userInputs.length - 1], type: "user" }, // User input with type "user"
+        { content: feedback, type: "ai" }, // AI response with type "ai"
+      ]);
     }
-  }, [feedback]);
+  }, [feedback, userInputs]);
 
-  // Log userInputs whenever it changes
+  // Log combinedArray whenever it changes
   useEffect(() => {
-    console.log("AI:", userInputs);
-  }, [userInputs]);
+    console.log(combinedArray);
+  }, [combinedArray]);
 
   return (
-    <>
+    <div className="container1">
+      {/* Render initial question */}
       <div className="AI-responses">
-        <Typewriter text={"   " + initialQuestion} />
+        {initialQuestion ? (
+          <Typewriter text={"   " + initialQuestion} />
+        ) : (
+          <p>...</p>
+        )}
       </div>
-      {responseArray.map((response, index) => (
-        <div key={index} className="AI-responses">
-          <Typewriter text={"  " + response} />
+
+      {/* Render combined inputs */}
+      {combinedArray.map((item, index) => (
+        <div
+          key={index}
+          className={item.type === "user" ? "user-responses" : "AI-responses"}
+        >
+          {item.type === "user" ? (
+            <p>{item.content}</p>
+          ) : (
+            <Typewriter text={"   " + item.content} />
+          )}
         </div>
       ))}
-      {/* Map through userInputs array */}
-      {userInputs.map((input, index) => (
-        <div key={index} className="AI-responses">
-          <Typewriter text={"  " + input} />
-        </div>
-      ))}
-    </>
+    </div>
   );
 };

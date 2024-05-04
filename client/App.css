@@ -63,18 +63,38 @@ h2 {
 }
 
 .output {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   padding-left: 50px;
   padding-right: 50px;
   padding-bottom: 7rem;
-  font-weight: 200;
+  padding-top: 7rem; /* Add padding-top to create space for fading at the top */
+  font-weight: 300;
+
+  --fade-length: 7rem; /* Length of the fade effect */
+  --fade-start: 80%; /* Starting point for the fade effect */
+
+  /* Gradient mask for fading at the top */
+  mask-image: linear-gradient(
+    to top,
+    transparent,
+    white calc(100% - var(--fade-start) - var(--fade-length)),
+    white
+  );
+
+  /* Gradient mask for fading at the bottom */
+  mask-image: linear-gradient(
+    to bottom,
+    white var(--fade-start),
+    transparent calc(var(--fade-start) + var(--fade-length)),
+    transparent
+  );
 }
 
 @media (max-width: 400px) {
   .output {
     padding-left: 10px;
     padding-right: 10px;
-    font-size: 1rem;
+    font-size: 0.75rem;
   }
 }
 
@@ -330,13 +350,28 @@ textarea {
   color: aliceblue;
 }
 
-.AI-responses {
-  background-color: #303030;
+.container {
+  display: flex;
+}
+
+.AI-responses,
+.user-responses {
+  background-color: #303030ab;
   border-style: solid;
-  border-color: #325c307d;
-  width: fit-content;
-  padding: 5px;
-  border-radius: 5px;
-  margin: 3px;
+  border-width: 1px;
+  border-radius: 10px;
+  margin: 10px;
   overflow: hidden;
+  padding: 5px;
+  max-width: 60%; /* Set a maximum width for the responses */
+}
+
+.AI-responses {
+  border-color: #3b5639c4;
+  margin-right: auto;
+}
+
+.user-responses {
+  border-color: #6c2f2fc8;
+  margin-left: auto;
 }
