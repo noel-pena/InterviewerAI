@@ -63,25 +63,22 @@ h2 {
 }
 
 .output {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   padding-left: 50px;
   padding-right: 50px;
   padding-bottom: 7rem;
-  padding-top: 7rem; /* Add padding-top to create space for fading at the top */
+  padding-top: 7rem;
   font-weight: 300;
 
-  --fade-length: 7rem; /* Length of the fade effect */
-  --fade-start: 80%; /* Starting point for the fade effect */
+  --fade-length: 7rem;
+  --fade-start: 90%;
 
-  /* Gradient mask for fading at the top */
   mask-image: linear-gradient(
     to top,
     transparent,
     white calc(100% - var(--fade-start) - var(--fade-length)),
     white
   );
-
-  /* Gradient mask for fading at the bottom */
   mask-image: linear-gradient(
     to bottom,
     white var(--fade-start),
@@ -214,7 +211,9 @@ h2 {
   margin-top: 20px;
 }
 .input {
-  border: none;
+  border: solid;
+  border-color: #3b5639db;
+  border-width: 3px;
   padding: 1rem;
   margin: -1.5rem;
   margin-right: 15px;
@@ -230,6 +229,7 @@ h2 {
 
 @media (max-width: 400px) {
   .input {
+    border-width: 1px;
     margin-left: 15px;
     padding-right: 45px;
     font-size: 1rem;
@@ -237,10 +237,10 @@ h2 {
 }
 
 .input:focus {
-  outline-color: #d3d3d3;
-  background: #d3d3d3;
+  outline-color: #3b5639db;
+  background: #e8e8e8;
   box-shadow: inset 20px 20px 60px #c5c5c52b,
-    inset -20px -20px 60px rgba(255, 255, 255, 0.102); /* Fix typo here */
+    inset -20px -20px 60px rgba(255, 255, 255, 0.102);
   transition: 0.3s;
   border-radius: 5px;
 }
@@ -262,8 +262,8 @@ h2 {
   position: absolute;
   margin-right: 5px;
   color: #212121;
-  top: 20%; /* Adjust as needed */
-  right: 3%; /* Adjust as needed */
+  top: 20%;
+  right: 3%;
   transform: translateY(-50%);
   cursor: pointer;
   transition: color 0.4s ease-in-out !important;
@@ -350,28 +350,51 @@ textarea {
   color: aliceblue;
 }
 
-.container {
-  display: flex;
+.container1 {
+  padding: 10px;
 }
 
 .AI-responses,
 .user-responses {
-  background-color: #303030ab;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 10px;
-  margin: 10px;
+  border-radius: 15px;
+  background: #2c2c2c;
+  margin: 15px;
   overflow: hidden;
   padding: 5px;
-  max-width: 60%; /* Set a maximum width for the responses */
+  width: fit-content;
+  max-width: 60%;
+  min-width: 50px;
 }
 
+.AI-responses,
+.user-responses {
+  --r: 25px;
+  --t: 20px;
+
+  padding: calc(2 * var(--r) / 3);
+  -webkit-mask: radial-gradient(
+        var(--t) at var(--_d) 0,
+        #0000 98%,
+        #000000 102%
+      )
+      var(--_d) 100% / calc(100% - var(--r)) var(--t) no-repeat,
+    conic-gradient(at var(--r) var(--r), #000 75%, #0000 0) calc(var(--r) / -2)
+      calc(var(--r) / -2) padding-box,
+    radial-gradient(50% 50%, #000 98%, #0000 101%) 0 0 / var(--r) var(--r) space
+      padding-box;
+  background: linear-gradient(135deg, #1c1c1cad, #2020207d) border-box;
+}
 .AI-responses {
-  border-color: #3b5639c4;
+  --_d: 0%;
+  border-left: var(--t) solid #0000;
+  margin-right: var(--t);
+  place-self: start;
   margin-right: auto;
 }
-
 .user-responses {
-  border-color: #6c2f2fc8;
+  --_d: 100%;
+  border-right: var(--t) solid #0000;
+  margin-left: var(--t);
+  place-self: end;
   margin-left: auto;
 }

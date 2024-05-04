@@ -43,11 +43,7 @@ export const AI = ({ feedback, userInputs }) => {
     <div className="container1">
       {/* Render initial question */}
       <div className="AI-responses">
-        {initialQuestion ? (
-          <Typewriter text={"   " + initialQuestion} />
-        ) : (
-          <p>...</p>
-        )}
+        <Typewriter text={"   " + initialQuestion} />
       </div>
 
       {/* Render combined inputs */}

@@ -28,6 +28,9 @@ export const TextBox = ({ onFeedback, onUserInput }) => {
 
   const handleSendClick = async () => {
     try {
+      if (text.trim() === "") {
+        return;
+      }
       addToUserInputs();
       const res = await axios.post("http://localhost:8000/feedback", {
         user_input: text,
@@ -69,8 +72,8 @@ export const TextBox = ({ onFeedback, onUserInput }) => {
               handleSendClick();
             }
           }}
+          required
         />
-
         <SendButton onClick={handleSendClick} />
       </form>
     </div>
