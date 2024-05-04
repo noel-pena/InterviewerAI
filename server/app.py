@@ -15,7 +15,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @cross_origin()
 def get_initial_question():
     try:
-        feedback = userInterface("")  # Provide an empty user input to trigger AI to generate an initial question
+        feedback = userInterface("") 
         return jsonify({"initial_question": feedback})
     except Exception as e:
         return jsonify({"error": str(e)})
