@@ -20,8 +20,7 @@ export const TextBox = ({ onFeedback, onUserInput }) => {
 
   const addToUserInputs = () => {
     setUserInputs((prevInputs) => {
-      const updatedInputs = [...prevInputs, text]; // Append the input value to the array
-      console.log("Updated userInputs:", updatedInputs); // Log the updated array
+      const updatedInputs = [...prevInputs, text];
       return updatedInputs;
     });
   };

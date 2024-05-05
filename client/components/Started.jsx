@@ -4,12 +4,14 @@ import { AI } from "./AI";
 import { ModernButton } from "./subcomponents/ModernButton";
 import { Grid, CircularProgress } from "@mui/material";
 import { TextBox } from "./subcomponents/TextBox";
+import { Selection } from "./subcomponents/Selection";
 
 export const Started = () => {
   const [buttonClicked, setButtonClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [feedback, setFeedback] = useState("");
   const [userInputs, setUserInputs] = useState([]);
+  const [category, setCategory] = useState("");
 
   const gridRef = useRef(null);
 
@@ -18,6 +20,10 @@ export const Started = () => {
       const gridContainer = gridRef.current;
       gridContainer.scrollTop = gridContainer.scrollHeight;
     }
+  };
+
+  const handleCategoryChange = (category) => {
+    setCategory(category);
   };
 
   const handleButtonClick = () => {
@@ -75,7 +81,11 @@ export const Started = () => {
             }}
             ref={gridRef}
           >
-            <AI feedback={feedback} userInputs={userInputs} />
+            <AI
+              feedback={feedback}
+              userInputs={userInputs}
+              category={category}
+            />
           </Grid>
           <Grid item pt={5}>
             <TextBox
@@ -85,9 +95,14 @@ export const Started = () => {
           </Grid>
         </>
       ) : (
-        <Grid item>
-          <ModernButton onClick={handleButtonClick} />
-        </Grid>
+        <>
+          <Grid item>
+            <Selection onCategoryChange={handleCategoryChange} />
+          </Grid>
+          <Grid item>
+            <ModernButton onClick={handleButtonClick} />
+          </Grid>
+        </>
       )}
     </Grid>
   );

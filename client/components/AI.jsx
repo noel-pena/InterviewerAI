@@ -8,11 +8,15 @@ export const AI = ({ feedback, userInputs }) => {
   const [combinedArray, setCombinedArray] = useState([]);
 
   // Fetch initial question and set initial state
-  const fetchInitialQuestion = async () => {
+  const fetchInitialQuestion = async (category) => {
     try {
-      const res = await axios.get("http://localhost:8000/initial_question", {
-        withCredentials: false,
-      });
+      const res = await axios.get(
+        `http://localhost:8000/initial_question?category=${category}`,
+        {
+          withCredentials: false,
+        }
+      );
+      console.log("initial questions response:", res.data);
       setInitialQuestion(res.data.initial_question);
     } catch (error) {
       console.error("Error fetching initial question:", error);

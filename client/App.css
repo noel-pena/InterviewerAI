@@ -112,7 +112,7 @@ h2 {
   border-color: transparent;
   font-size: 16px;
   background-color: inherit;
-  border-radius: 100px;
+  border-radius: 10px;
   font-weight: 600;
   color: #589f55;
   box-shadow: 0 0 0 2px #589f55;
@@ -397,4 +397,43 @@ textarea {
   margin-left: var(--t);
   place-self: end;
   margin-left: auto;
+}
+
+.selector {
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-weight: 200;
+  color: rgb(215, 215, 215);
+  appearance: none;
+  border: 0;
+  outline: 0;
+  width: 15rem;
+  padding: 1.5rem 1rem 1.5rem 1rem;
+  background: var(--arrow-icon) no-repeat right 0.8em center / 1.4em,
+    linear-gradient(to left, var(--arrow-bg) 3em, var(--select-bg) 3em);
+  border-radius: 10px;
+  box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.4s ease-in-out !important;
+  &::-ms-expand {
+    display: none;
+  }
+  &:focus {
+    outline: none;
+  }
+  option {
+    color: inherit;
+    background-color: var(--option-bg);
+  }
+}
+
+.selector:hover {
+  color: black;
+  background-color: rgb(215, 215, 215);
+}
+
+@media (max-width: 400px) {
+  .selector {
+    width: 14rem;
+  }
 }
