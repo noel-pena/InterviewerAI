@@ -19,7 +19,14 @@ export const Selection = ({ onCategoryChange }) => {
 
   return (
     <>
-      <select className="selector" onChange={handleCategoryChange}>
+      <select
+        className="selector"
+        defaultValue=""
+        onChange={handleCategoryChange}
+      >
+        <option value="" disabled>
+          Select a category
+        </option>
         <option value="General">General</option>
         <option value="JavaScript">JavaScript</option>
         <option value="SQL">SQL</option>

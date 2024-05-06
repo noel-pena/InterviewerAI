@@ -16,7 +16,6 @@ export const AI = ({ feedback, userInputs }) => {
           withCredentials: false,
         }
       );
-      console.log("initial questions response:", res.data);
       setInitialQuestion(res.data.initial_question);
     } catch (error) {
       console.error("Error fetching initial question:", error);

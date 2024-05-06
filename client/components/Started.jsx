@@ -47,7 +47,7 @@ export const Started = () => {
   return (
     <Grid
       container
-      gap={10}
+      gap={3}
       flexDirection="column"
       sx={{
         justifyContent: buttonClicked ? "space-between" : "center",
@@ -99,9 +99,11 @@ export const Started = () => {
           <Grid item>
             <Selection onCategoryChange={handleCategoryChange} />
           </Grid>
-          <Grid item>
-            <ModernButton onClick={handleButtonClick} />
-          </Grid>
+          {category && (
+            <Grid item pt={2}>
+              <ModernButton onClick={handleButtonClick} />
+            </Grid>
+          )}
         </>
       )}
     </Grid>

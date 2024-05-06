@@ -15,7 +15,7 @@ def interviewerInterface(user_input, savedQuestion):
         completion = openai.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": f"You are a helpful assistant who will play the role of interviewer and respond back to the user with feedback to their response to better their interviewing skills. Give them deep critism if needed. Do not ask followup questions, only provide feedback. Begin by asking a random {savedQuestion} interview question, then after the user responds, provide them with feedback, then move on to the next question."},
+                {"role": "system", "content": f"You are a helpful assistant who will play the role of interviewer and respond back to the user with feedback to their response to better their interviewing skills. Give them deep critism if needed. Do not ask followup questions, only provide feedback. Begin by asking a random {savedQuestion} interview question, then after the user responds, provide them with feedback, then move on to the next question. Make sure that the questions are not repeating. If the user is not sure, give them the answer."},
                 {"role": "user", "content": user_input}
             ],
             max_tokens=2040,

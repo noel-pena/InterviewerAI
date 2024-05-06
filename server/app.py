@@ -8,6 +8,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+category_storage = {}
+
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -18,10 +20,8 @@ def send_question():
     try:
         data = request.get_json()
         category = data.get("category")
-        global savedQuestion
-        savedQuestion = category
-        print("savedQuestion:", savedQuestion )
-        feedback = interviewerInterface("", savedQuestion)
+        category_storage['savedQuestion'] = category
+        feedback = interviewerInterface("", category)
         return jsonify({"initial_question": feedback})
     except Exception as e:
         return jsonify({"error": str(e)})
@@ -31,8 +31,8 @@ def send_question():
 @cross_origin()
 def get_initial_question():
     try:
-        category = request.args.get('category')  # Get the category from the query parameters
-        feedback = interviewerInterface("")
+        category = category_storage.get("savedQuestion", "")  # Get the category from the query parameters
+        feedback = interviewerInterface("", category)
         return jsonify({"initial_question": feedback})
     except Exception as e:
         return jsonify({"error": str(e)})
@@ -43,7 +43,8 @@ def get_feedback():
     try:
         data = request.get_json()
         user_input = data.get('user_input')
-        feedback = interviewerInterface(user_input)
+        category_storage.get("savedQuestion", "")
+        feedback = interviewerInterface(user_input, category)
         return jsonify({"feedback": feedback})
     except Exception as e:
         return jsonify({"error": str(e)})
