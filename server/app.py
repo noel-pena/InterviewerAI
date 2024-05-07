@@ -49,6 +49,5 @@ def get_feedback():
 # curl -X POST http://localhost:8000/clear-memory
 
 if __name__ == '__main__':
-    host = os.getenv("FLASK_RUN_HOST", "127.0.0.1")
-    port = int(os.getenv("FLASK_RUN_PORT", 8000))
-    app.run(host=host, port=port)
+    # Remove the host and port parameters from app.run()
+    app.run()
