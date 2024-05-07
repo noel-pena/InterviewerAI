@@ -48,5 +48,4 @@ def get_feedback():
 # curl -X POST http://localhost:8000/clear-memory
 
 if __name__ == '__main__':
-    # Remove the host and port parameters from app.run()
-    app.run()
+    app.run(host="0.0.0.0", port=8000)
