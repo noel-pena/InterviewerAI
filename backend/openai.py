@@ -1,7 +1,7 @@
 import openai
 from dotenv import load_dotenv
 import os
-from questions import get_random_question
+from backend.question import get_random_question
 import gc
 
 load_dotenv()
@@ -50,3 +50,5 @@ def interviewerInterface(user_input, category):
         current_question = initial_question
         initial_question = None
         # clear_memory()
+import sys
+print(sys.path)
