@@ -7,7 +7,8 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:8000",
+        target: "https://todo-list-react-50js.onrender.com",
+        // target: "http://localhost:8000",
         changeOrigin: true,
         secure: false,
       },
