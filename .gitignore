@@ -7,7 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 .env
-./server/interviewerai
+
 
 node_modules
 dist
@@ -15,6 +15,7 @@ dist-ssr
 *.local
 
 # Editor directories and files
+.interviewerai
 .vscode/*
 !.vscode/extensions.json
 .idea
