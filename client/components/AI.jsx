@@ -3,28 +3,31 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Typewriter } from "./subcomponents/Typewriter";
 
-export const AI = ({ feedback, userInputs }) => {
+export const AI = ({ feedback, userInputs, category }) => {
   const [initialQuestion, setInitialQuestion] = useState("");
   const [combinedArray, setCombinedArray] = useState([]);
+  const [initialQuestionFetched, setInitialQuestionFetched] = useState(false);
 
   // Fetch initial question and set initial state
-  const fetchInitialQuestion = async (category) => {
-    try {
-      const res = await axios.get(
-        `http://localhost:8000/initial_question?category=${category}`,
-        {
-          withCredentials: false,
-        }
-      );
-      setInitialQuestion(res.data.initial_question);
-    } catch (error) {
-      console.error("Error fetching initial question:", error);
-    }
-  };
-
   useEffect(() => {
-    fetchInitialQuestion();
-  }, []);
+    if (category && !initialQuestionFetched) {
+      const fetchInitialQuestion = async () => {
+        try {
+          const res = await axios.get(
+            `http://localhost:8000/initial_question?category=${category}`,
+            {
+              withCredentials: false,
+            }
+          );
+          setInitialQuestion(res.data.initial_question);
+          setInitialQuestionFetched(true);
+        } catch (error) {
+          console.error("Error fetching initial question:", error);
+        }
+      };
+      fetchInitialQuestion();
+    }
+  }, [category, initialQuestionFetched]);
 
   // Combine userInputs and responseArray
   useEffect(() => {
@@ -41,6 +44,12 @@ export const AI = ({ feedback, userInputs }) => {
   useEffect(() => {
     console.log(combinedArray);
   }, [combinedArray]);
+
+  // useEffect(() => {
+  //   if (feedback) {
+  //     setInitialQuestionFetched(false);
+  //   }
+  // }, [feedback]);
 
   return (
     <div className="container1">

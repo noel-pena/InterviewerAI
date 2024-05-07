@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // eslint-disable-next-line react/prop-types
-export const Selection = ({ onCategoryChange }) => {
+export const Selection = ({ onCategoryChange, category }) => {
   const handleCategoryChange = async (e) => {
     e.preventDefault();
     const category = e.target.value;
@@ -23,6 +23,7 @@ export const Selection = ({ onCategoryChange }) => {
         className="selector"
         defaultValue=""
         onChange={handleCategoryChange}
+        value={category}
       >
         <option value="" disabled>
           Select a category

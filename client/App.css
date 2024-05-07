@@ -357,7 +357,7 @@ textarea {
 .AI-responses,
 .user-responses {
   border-radius: 15px;
-  background: #2c2c2c;
+
   margin: 15px;
   overflow: hidden;
   padding: 5px;
@@ -385,6 +385,7 @@ textarea {
   background: linear-gradient(135deg, #1c1c1cad, #2020207d) border-box;
 }
 .AI-responses {
+  background: #434642;
   --_d: 0%;
   border-left: var(--t) solid #0000;
   margin-right: var(--t);
@@ -392,6 +393,7 @@ textarea {
   margin-right: auto;
 }
 .user-responses {
+  background: #589f55;
   --_d: 100%;
   border-right: var(--t) solid #0000;
   margin-left: var(--t);

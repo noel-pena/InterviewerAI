@@ -97,7 +97,10 @@ export const Started = () => {
       ) : (
         <>
           <Grid item>
-            <Selection onCategoryChange={handleCategoryChange} />
+            <Selection
+              onCategoryChange={handleCategoryChange}
+              setCategory={category}
+            />
           </Grid>
           {category && (
             <Grid item pt={2}>

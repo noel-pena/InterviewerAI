@@ -37,7 +37,8 @@ export const TextBox = ({ onFeedback, onUserInput }) => {
 
       const feedback = res.data.feedback;
       onFeedback(feedback, text);
-      onUserInput(userInputs.concat(text)); // Issue might be here
+      onUserInput(userInputs.concat(text));
+      console.log(`feedback: ${feedback}, text: ${text}`);
       setText("");
     } catch (error) {
       console.error("Error fetching data:", error);
