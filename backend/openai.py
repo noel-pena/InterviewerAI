@@ -50,5 +50,4 @@ def interviewerInterface(user_input, category):
         current_question = initial_question
         initial_question = None
         # clear_memory()
-import sys
-print(sys.path)
+
