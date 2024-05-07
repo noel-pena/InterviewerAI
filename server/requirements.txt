@@ -8,7 +8,6 @@ ConfigParser==7.0.0
 contextlib2==21.6.0
 cryptography==42.0.7
 curio==1.6
-cython==3.0.10
 disco==1.40.4
 docutils==0.21.2
 email_validator==2.1.1
