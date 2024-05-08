@@ -1,4 +1,3 @@
-import "./App.css";
 import { Started } from "./components/Started";
 
 function App() {

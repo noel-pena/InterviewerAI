@@ -71,7 +71,7 @@ export const Started = () => {
             textAlign="center"
             sx={{
               height: "75vh",
-              maxHeight: "calc(75vh - 120px)",
+              maxHeight: "calc(75vh - 7.5rem)",
               overflowY: "auto",
               width: "100%",
               "&::-webkit-scrollbar": {

@@ -51,10 +51,9 @@ export const TextBox = ({ onFeedback, onUserInput }) => {
         <span
           className="char"
           style={{
-            fontSize: "0.75rem",
             position: "relative",
             top: 0,
-            left: -50,
+            left: -40,
           }}
         >
           {text.length}/{maxCharLimit}

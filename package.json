@@ -10,17 +10,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@csstools/normalize.css": "^12.1.1",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.15",
     "annyang": "^2.6.1",
+    "autoprefixer": "^10.4.19",
     "axios": "^1.6.8",
     "body-parser": "^1.20.2",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "marked": "^12.0.2",
-    "openai": "^4.34.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-textarea-autosize": "^8.5.3"
@@ -33,6 +34,7 @@
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
+    "postcss-normalize": "^10.0.1",
     "vite": "^5.2.0"
   }
 }

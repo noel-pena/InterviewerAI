@@ -7,8 +7,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-app = Flask(__name__)
-CORS(app, supports_credentials=True)
+app = Flask(__name__, static_folder='backend/dist')
+CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 category_storage = {"savedQuestion": None}
@@ -45,13 +45,15 @@ def get_feedback():
     except Exception as e:
         return jsonify({"error": str(e)})
 
+# Serve the index.html file from the "backend/dist" folder
 @app.route("/")
 def index():
-    return send_from_directory(os.path.join("backend", "dist"), "index.html")
+    return send_from_directory(os.path.join("dist"), "index.html")
 
-@app.route("/<path:filename>")
+# Serve static assets (JS, CSS, etc.) from the "backend/dist/assets" folder
+@app.route("/assets/<path:filename>")
 def serve_static(filename):
-    return send_from_directory(os.path.join("backend", "dist"), filename)
+    return send_from_directory(os.path.join("dist", "assets"), filename)
 
 if __name__ == '__main__':
-    app.run(port=8080)
+    app.run()
