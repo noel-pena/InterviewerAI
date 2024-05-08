@@ -45,6 +45,7 @@ def get_feedback():
     except Exception as e:
         return jsonify({"error": str(e)})
 
+@app.route("/")
 def index():
     return send_from_directory(os.path.join("backend", "dist"), "index.html")
 
