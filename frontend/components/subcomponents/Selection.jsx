@@ -8,7 +8,7 @@ export const Selection = ({ onCategoryChange, category }) => {
     onCategoryChange(category);
     console.log("Selected Category:", { category: category }); // Log the selected category
     try {
-      const response = await axios.post("http://localhost:8000/send_question", {
+      const response = await axios.post("/api/send_question", {
         category: category,
       });
       console.log("Response1:", response.data); // Log the response from the backend

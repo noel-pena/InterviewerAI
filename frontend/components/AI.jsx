@@ -14,7 +14,7 @@ export const AI = ({ feedback, userInputs, category }) => {
       const fetchInitialQuestion = async () => {
         try {
           const res = await axios.get(
-            `http://localhost:8000/initial_question?category=${category}`,
+            `/api/initial_question?category=${category}`,
             {
               withCredentials: false,
             }

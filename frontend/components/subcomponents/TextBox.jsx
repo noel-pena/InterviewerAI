@@ -31,7 +31,7 @@ export const TextBox = ({ onFeedback, onUserInput }) => {
         return;
       }
       addToUserInputs();
-      const res = await axios.post("http://localhost:8000/feedback", {
+      const res = await axios.post("/api/feedback", {
         user_input: text,
       });
 
