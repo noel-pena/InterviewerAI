@@ -12,7 +12,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 category_storage = {"savedQuestion": None}
 
-@app.route('/send_question', methods=['POST'])
+@app.route('/api/send_question', methods=['POST'])
 @cross_origin()
 def send_question():
     try:
@@ -23,7 +23,7 @@ def send_question():
     except Exception as e:
         return jsonify({"error": str(e)})
 
-@app.route('/initial_question', methods=['GET'])
+@app.route('/api/initial_question', methods=['GET'])
 @cross_origin()
 def get_initial_question():
     try:
@@ -33,7 +33,7 @@ def get_initial_question():
     except Exception as e:
         return jsonify({"error": str(e)})
 
-@app.route('/feedback', methods=['POST'])
+@app.route('/api/feedback', methods=['POST'])
 def get_feedback():
     try:
         data = request.get_json()
@@ -44,8 +44,5 @@ def get_feedback():
     except Exception as e:
         return jsonify({"error": str(e)})
 
-
-# curl -X POST http://localhost:8000/clear-memory
-
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=8000)
+    app.run()
