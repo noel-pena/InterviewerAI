@@ -1,5 +1,6 @@
+import os
 from unicodedata import category
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS, cross_origin
 from backend.openai import interviewerInterface
 from dotenv import load_dotenv
@@ -43,6 +44,14 @@ def get_feedback():
         return jsonify({"feedback": feedback})
     except Exception as e:
         return jsonify({"error": str(e)})
+
+def index():
+    return send_from_directory(os.path.join("backend", "dist"), "index.html")
+
+# Serve static files from the dist folder
+@app.route("/<path:filename>")
+def serve_static(filename):
+    return send_from_directory(os.path.join("backend", "dist"), filename)
 
 if __name__ == '__main__':
     app.run(port=8080)
