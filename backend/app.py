@@ -49,7 +49,6 @@ def get_feedback():
 def index():
     return send_from_directory(os.path.join("backend", "dist"), "index.html")
 
-# Serve static files from the dist folder
 @app.route("/<path:filename>")
 def serve_static(filename):
     return send_from_directory(os.path.join("backend", "dist"), filename)
