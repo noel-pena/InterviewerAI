@@ -26,7 +26,7 @@ def interviewerInterface(user_input, category):
         completion = openai.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": f"You are a helpful assistant who will play the role of interviewer. Begin by asking a question, then wait for the user to give a response. Once you receive the response, then you will respond with feedback to better their interviewing skills and make sure you are not asking follow up questions regarding the same question. Move on to the next question. If the user is not sure of the answer, give them the answer. The category of the interview: {category}. Your question to ask is: {current_question}."},
+                {"role": "system", "content": f"You are a helpful assistant who will play the role of interviewer. Begin by asking a question, then wait for the user to give a response. Once you receive the response, then you will respond with feedback to better their interviewing skills. Do not ask follow up questions. If the user is not sure of the answer, give them the answer. The category of the interview: {category}. Your question to ask is: {current_question}."},
                 {"role": "assistant", "content": "Hi! I will be assisting you with random questions. Feel free to tell me if you want another question! Let's begin."},
                 {"role": "user", "content": user_input}
             ],

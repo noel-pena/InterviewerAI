@@ -1,6 +1,5 @@
 import os
-from unicodedata import category
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory, session
 from flask_cors import CORS, cross_origin
 from backend.openai import interviewerInterface
 from dotenv import load_dotenv
@@ -15,7 +14,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 app.secret_key = secrets.token_hex(16)
 
-category_storage = {"savedQuestion": None}
+category_storage = {}
 
 def clear_memory():
     try:
@@ -31,7 +30,8 @@ def send_question():
     try:
         data = request.get_json()
         selected_category = data.get("category")
-        category_storage["savedQuestion"] = selected_category
+        session['saved_category'] = selected_category
+        category_storage[session.sid] = selected_category
         return jsonify({"initial_question": "Category saved!"})
     except Exception as e:
         return jsonify({"error": str(e)})
@@ -41,7 +41,7 @@ def send_question():
 def get_initial_question():
     global category_storage
     try:
-        saved_category = category_storage.get("savedQuestion", "")
+        saved_category = session.get("saved_category", "")
         feedback, current_question = interviewerInterface("", saved_category)
         print("Saved category from flask:", saved_category)
         return jsonify({"initial_question": feedback, "category": saved_category, "current_question": current_question})
@@ -54,7 +54,7 @@ def get_feedback():
     try:
         data = request.get_json()
         user_input = data.get('user_input')
-        saved_category = category_storage.get("savedQuestion", category)
+        saved_category = session.get("saved_category", "")
         feedback, current_question = interviewerInterface(user_input, saved_category)
         return jsonify({"feedback": feedback, "current_question": current_question})
     except Exception as e:
@@ -64,8 +64,6 @@ def get_feedback():
 def index():
     global category_storage
     clear_memory()
-    app.secret_key = secrets.token_hex(16)
-    print("New Flask secret key generated:", app.secret_key)
     print("Category storage:", category_storage)  
     return send_from_directory("dist", "index.html")
 
