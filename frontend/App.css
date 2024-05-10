@@ -66,7 +66,7 @@ h2 {
   color: transparent !important;
 }
 .output {
-  font-size: 0.85rem;
+  font-size: 1.15rem;
   padding: 7rem 3.125rem;
   font-weight: 300;
   --fade-length: 7rem;
@@ -96,14 +96,14 @@ h2 {
     transparent
   );
 }
-@media (max-width: 25rem) {
+@media (max-width: 26rem) {
   .output {
     padding-left: 0.625rem;
     padding-right: 0.625rem;
-    font-size: 0.75rem;
+    font-size: 1rem;
   }
 }
-@media (max-width: 25rem) {
+@media (max-width: 26rem) {
   .text {
     font-size: 0.7125rem;
   }
@@ -214,21 +214,21 @@ h2 {
   transition: 0.3s;
   font-family: Inter, sans-serif;
   font-style: normal;
-  font-size: 0.85rem;
+  font-size: 1.15rem;
   font-weight: 300;
 }
-@media (max-width: 25rem) {
+@media (max-width: 26rem) {
   .input {
     width: 40vh;
     border-width: 0.0625rem;
     padding-right: 2.8125rem;
-    font-size: 0.75rem;
+    font-size: 1rem;
   }
 }
 .char {
   font-size: 0.75rem;
 }
-@media (max-width: 25rem) {
+@media (max-width: 26rem) {
   .char {
     font-size: 0.4rem;
   }
@@ -244,7 +244,7 @@ h2 {
   position: relative;
   padding-bottom: 2.8rem;
 }
-@media (max-width: 25rem) {
+@media (max-width: 26rem) {
   .input-container {
     position: fixed;
     bottom: 0;
@@ -277,7 +277,7 @@ h2 {
   font-family: Inter, sans-serif;
   font-style: normal;
 }
-@media (max-width: 25rem) {
+@media (max-width: 26rem) {
   ::placeholder {
     font-size: 0.7rem;
   }
@@ -336,7 +336,8 @@ textarea {
   padding: 0.625rem;
 }
 .AI-responses,
-.user-responses {
+.user-responses,
+.AI-question {
   border-radius: 0.9375rem;
   margin: 0.9375rem;
   overflow: hidden;
@@ -345,17 +346,19 @@ textarea {
   max-width: 60%;
   min-width: 3.125rem;
 }
-@media (max-width: 25rem) {
+@media (max-width: 26rem) {
   .AI-responses,
-  .user-responses {
+  .user-responses,
+  .AI-question {
     max-width: 90%;
     margin: 0.5rem;
   }
 }
 .AI-responses,
-.user-responses {
-  --r: 1.25rem;
-  --t: 1.25rem;
+.user-responses,
+.AI-question {
+  --r: 0.75rem;
+  --t: 0.75rem;
   padding: calc(1 * var(--r) / 4);
   padding-left: 0.75rem;
   padding-right: 0.75rem;
@@ -371,13 +374,22 @@ textarea {
       padding-box;
   background: linear-gradient(135deg, #1c1c1cad, #2020207d) border-box;
 }
-.AI-responses {
+.AI-responses,
+.AI-question {
   background: #434642;
   --_d: 0%;
   border-left: var(--t) solid #0000;
   margin-right: var(--t);
   place-self: start;
   margin-right: auto;
+}
+
+.AI-question {
+  opacity: 0;
+}
+
+.AI-question.show {
+  opacity: 1;
 }
 .user-responses {
   background: #589f55;
@@ -387,6 +399,7 @@ textarea {
   place-self: end;
   margin-left: auto;
 }
+
 .selector {
   text-align: center;
   font-family: Inter, sans-serif;
@@ -422,7 +435,7 @@ textarea {
   color: #000;
   background-color: #d7d7d7;
 }
-@media (max-width: 25rem) {
+@media (max-width: 26rem) {
   .selector {
     padding: 1rem 0.75rem;
     width: 10rem;

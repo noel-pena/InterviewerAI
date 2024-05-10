@@ -1,29 +1,36 @@
+/* eslint-disable react/prop-types */
+import { useEffect } from "react";
 import axios from "axios";
 
-// eslint-disable-next-line react/prop-types
-export const Selection = ({ onCategoryChange, category }) => {
-  const handleCategoryChange = async (e) => {
-    e.preventDefault();
-    const category = e.target.value;
-    onCategoryChange(category);
-    console.log("Selected Category:", { category: category }); // Log the selected category
-    try {
-      const response = await axios.post("/api/send_question", {
-        category: category,
-      });
-      console.log("Response1:", response.data); // Log the response from the backend
-    } catch (error) {
-      console.error("Error fetching initial question:", error);
-    }
+export const Selection = ({ onCategoryChange, selectedCategory }) => {
+  const handleCategoryChange = (e) => {
+    const selectedCategory = e.target.value;
+    onCategoryChange(selectedCategory);
   };
+
+  useEffect(() => {
+    const fetchInitialQuestion = async () => {
+      if (selectedCategory !== "") {
+        console.log("Selected Category:", { category: selectedCategory });
+        try {
+          const response = await axios.post("/api/send_question", {
+            category: selectedCategory,
+          });
+          console.log("Response1:", response.data); // Log the response from the backend
+        } catch (error) {
+          console.error("Error fetching initial question:", error);
+        }
+      }
+    };
+    fetchInitialQuestion();
+  }, [selectedCategory, onCategoryChange]);
 
   return (
     <>
       <select
         className="selector"
-        defaultValue=""
         onChange={handleCategoryChange}
-        value={category}
+        value={selectedCategory}
       >
         <option value="" disabled>
           Select a category

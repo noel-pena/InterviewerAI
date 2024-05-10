@@ -10,6 +10,7 @@ export const Started = () => {
   const [buttonClicked, setButtonClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [feedback, setFeedback] = useState("");
+  const [currentQuestion, setCurrentQuestion] = useState("");
   const [userInputs, setUserInputs] = useState([]);
   const [category, setCategory] = useState("");
 
@@ -39,9 +40,20 @@ export const Started = () => {
     setUserInputs((prevUserInputs) => [...prevUserInputs, text]);
   };
 
+  const handleCurrentQuestion = (currentQuestion) => {
+    setCurrentQuestion(currentQuestion);
+  };
+
   useEffect(() => {
     scrollToBottom();
   }, [feedback, userInputs]);
+
+  useEffect(() => {
+    if (category !== "") {
+      // Perform actions here that need the updated category value
+      console.log("Category updated:", category);
+    }
+  }, [category]);
 
   const handleUserInputs = () => {};
   return (
@@ -53,6 +65,7 @@ export const Started = () => {
         justifyContent: buttonClicked ? "space-between" : "center",
         alignItems: "center",
         minHeight: "100vh",
+        maxHeight: "100vh",
         flex: 1,
         overflow: "hidden",
       }}
@@ -67,6 +80,7 @@ export const Started = () => {
           <Grid
             item
             p={0}
+            mt={1}
             className="output"
             textAlign="center"
             sx={{
@@ -83,12 +97,14 @@ export const Started = () => {
           >
             <AI
               feedback={feedback}
+              currentQuestion={currentQuestion}
               userInputs={userInputs}
               category={category}
             />
           </Grid>
           <Grid item pt={5}>
             <TextBox
+              onCurrentQuestion={handleCurrentQuestion}
               onFeedback={handleFeedback}
               onUserInput={handleUserInputs}
             />
@@ -99,7 +115,7 @@ export const Started = () => {
           <Grid item>
             <Selection
               onCategoryChange={handleCategoryChange}
-              setCategory={category}
+              selectedCategory={category}
             />
           </Grid>
           {category && (

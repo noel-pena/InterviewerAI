@@ -3,66 +3,80 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Typewriter } from "./subcomponents/Typewriter";
 
-export const AI = ({ feedback, userInputs, category }) => {
+export const AI = ({ feedback, userInputs, category, currentQuestion }) => {
   const [initialQuestion, setInitialQuestion] = useState("");
   const [combinedArray, setCombinedArray] = useState([]);
   const [initialQuestionFetched, setInitialQuestionFetched] = useState(false);
+  const [loading, setLoading] = useState(false); // Add loading state
 
-  // Fetch initial question and set initial state
   useEffect(() => {
     if (category && !initialQuestionFetched) {
       const fetchInitialQuestion = async () => {
         try {
+          setLoading(true);
           const res = await axios.get(
             `/api/initial_question?category=${category}`,
             {
               withCredentials: false,
             }
           );
-          setInitialQuestion(res.data.initial_question);
+          console.log("This is the read cat:", res.data);
+          setInitialQuestion(res.data.current_question);
           setInitialQuestionFetched(true);
         } catch (error) {
           console.error("Error fetching initial question:", error);
+        } finally {
+          setLoading(false);
         }
       };
       fetchInitialQuestion();
     }
   }, [category, initialQuestionFetched]);
 
-  // Combine userInputs and responseArray
   useEffect(() => {
-    if (feedback) {
+    if (feedback && currentQuestion) {
       setCombinedArray((prevCombined) => [
         ...prevCombined,
-        { content: userInputs[userInputs.length - 1], type: "user" }, // User input with type "user"
-        { content: feedback, type: "ai" }, // AI response with type "ai"
+        { content: userInputs[userInputs.length - 1], type: "user" },
+        { content: feedback, type: "ai" },
+        { content: currentQuestion, type: "AI-question" },
       ]);
+      setTimeout(() => {
+        const elements = document.querySelectorAll(".AI-question");
+        elements.forEach((element) => {
+          element.classList.add("show");
+        });
+      }, 3000);
     }
-  }, [feedback, userInputs]);
+  }, [feedback, userInputs, currentQuestion]);
 
-  // Log combinedArray whenever it changes
   useEffect(() => {
     console.log(combinedArray);
   }, [combinedArray]);
 
-  // useEffect(() => {
-  //   if (feedback) {
-  //     setInitialQuestionFetched(false);
-  //   }
-  // }, [feedback]);
-
   return (
     <div className="container1">
-      {/* Render initial question */}
-      <div className="AI-responses">
-        <Typewriter text={"   " + initialQuestion} />
-      </div>
+      {/* Display loading indicator if fetching initial question */}
+      {loading && <p>Loading...</p>}
+
+      {/* Render initial question when not loading */}
+      {!loading && (
+        <div className="AI-responses">
+          <Typewriter text={"   " + initialQuestion} />
+        </div>
+      )}
 
       {/* Render combined inputs */}
       {combinedArray.map((item, index) => (
         <div
           key={index}
-          className={item.type === "user" ? "user-responses" : "AI-responses"}
+          className={
+            item.type === "user"
+              ? "user-responses"
+              : item.type === "ai"
+              ? "AI-responses"
+              : "AI-question"
+          }
         >
           {item.type === "user" ? (
             <p>{item.content}</p>

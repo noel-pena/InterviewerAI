@@ -4,7 +4,7 @@ import { SendButton } from "./SendButton";
 import axios from "axios";
 
 // eslint-disable-next-line react/prop-types
-export const TextBox = ({ onFeedback, onUserInput }) => {
+export const TextBox = ({ onFeedback, onUserInput, onCurrentQuestion }) => {
   const [text, setText] = useState("");
   const [userInputs, setUserInputs] = useState([]);
 
@@ -25,7 +25,8 @@ export const TextBox = ({ onFeedback, onUserInput }) => {
     });
   };
 
-  const handleSendClick = async () => {
+  const handleSendClick = async (e) => {
+    e.preventDefault();
     try {
       if (text.trim() === "") {
         return;
@@ -35,10 +36,11 @@ export const TextBox = ({ onFeedback, onUserInput }) => {
         user_input: text,
       });
 
-      const feedback = res.data.feedback;
+      const { feedback, current_question: currentQuestion } = res.data;
       onFeedback(feedback, text);
+      onCurrentQuestion(currentQuestion);
       onUserInput(userInputs.concat(text));
-      console.log(`feedback: ${feedback}, text: ${text}`);
+      console.log(`feedback: ${feedback}, currentQuestion: ${currentQuestion}`);
       setText("");
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -66,14 +68,14 @@ export const TextBox = ({ onFeedback, onUserInput }) => {
           value={text}
           onChange={handleInputChange}
           onKeyDown={(e) => {
-            if (e.key === "Enter") {
+            if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
-              handleSendClick();
+              handleSendClick(e);
             }
           }}
           required
         />
-        <SendButton onClick={handleSendClick} />
+        <SendButton onClick={(e) => handleSendClick(e)} />
       </form>
     </div>
   );
