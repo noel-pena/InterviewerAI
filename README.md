@@ -10,7 +10,7 @@ Interviewer AI is an application that leverages OpenAI's API to simulate an inte
 - **Python Flask Backend:** Backend server built using Flask to handle API requests and responses.
 - **Vite React Frontend:** User interface developed using React for an interactive experience.
 
-## Installation or Link to site
+## Installation or Live Site
 
 Live site: https://interviewerai.onrender.com/
 
@@ -67,16 +67,16 @@ To run the Interviewer AI application locally, follow these steps:
 └── frontend
 ├── components
 │ ├── subcomponents
-│ │ ├── AI.jsx
-│ │ ├── ModernButton.jsx
-│ │ ├── Selection.jsx
-│ │ ├── SendButton.jsx
-│ │ ├── TextBox.jsx
-│ │ ├── Title.jsx
-│ │ └── Typewriter.jsx
-│ ├── App.css
-│ ├── App.jsx
-│ └── main.jsx
+│ │ ├── AI.jsx # Inputs from openaAI and user responses
+│ │ ├── ModernButton.jsx # Begin button
+│ │ ├── Selection.jsx # Category selection
+│ │ ├── SendButton.jsx # Send button inside of the text input
+│ │ ├── TextBox.jsx # Where the user inputs their reponse. API post route
+│ │ ├── Title.jsx # "InterviewerAI" clickable title that routes to "/"
+│ │ └── Typewriter.jsx #Typewriting effect from AI responses
+│ ├── App.css # Main stylesheet
+│ ├── App.jsx # Main App.jsx file
+│ └── main.jsx # Loading of ReactDOM
 └── package.json
 ```
 
@@ -84,7 +84,7 @@ To run the Interviewer AI application locally, follow these steps:
 
 ### Started.jsx
 
-This component manages the state of the application, including whether the button has been clicked, loading state, feedback from the AI, current question, user inputs, and selected category. It contains event handlers for category changes, button clicks, and feedback updates. Additionally, it includes effects to scroll to the bottom when feedback or user inputs change and to perform actions dependent on category changes. The JSX renders different components based on the application state, including the Title component, AI component, TextBox component, Selection component, and ModernButton component.
+This component manages the state of the application, including whether the button has been clicked, loading state, feedback from the AI, current question, user inputs, and selected category. It contains event handlers for category changes, button clicks, and feedback updates. The JSX renders different components based on the application state, including the Title component, AI component, TextBox component, Selection component, and ModernButton component.
 
 ```javascript
 <Grid
@@ -158,10 +158,23 @@ This component manages the state of the application, including whether the butto
 
 ### app.py
 
-This backend code sets up a Flask server to handle API requests for the Interviewer AI application. It includes routes for sending questions, getting initial questions, and receiving feedback. The code manages session data to store the selected category and interacts with an external module (interviewerInterface from openai) to handle interview logic. Additionally, it serves the frontend files and clears memory periodically to maintain performance.
+This backend code sets up a Flask server to handle API requests for the Interviewer AI application. It includes routes for sending questions, getting initial questions, and receiving feedback. The code manages session data to store the selected category and interacts with an abstracted python module (openai.py) to handle interview logic. Additionally, it serves the frontend files and clears memory periodically to maintain performance.
 
 ```python
+app = Flask(__name__, static_folder='backend/dist')
+CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
+app.secret_key = secrets.token_hex(16)
+
 category_storage = {}
+
+def clear_memory():
+    try:
+        gc.collect()
+        print("Memory cleared")
+    except Exception as e:
+        print({"error": str(e)}), 500
 
 @app.route('/api/send_question', methods=['POST'])
 @cross_origin()
@@ -199,4 +212,19 @@ def get_feedback():
         return jsonify({"feedback": feedback, "current_question": current_question})
     except Exception as e:
         return jsonify({"error": str(e)})
+
+@app.route("/")
+def index():
+    global category_storage
+    clear_memory()
+    print("Category storage:", category_storage)
+    return send_from_directory("dist", "index.html")
+
+@app.route("/assets/<path:filename>")
+def serve_static(filename):
+    return send_from_directory(os.path.join("dist", "assets"), filename)
+
+if __name__ == '__main__':
+    app.run()
+
 ```
