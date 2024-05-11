@@ -81,7 +81,7 @@ To run the Interviewer AI application locally, follow these steps:
 This component manages the state of the application, including whether the button has been clicked, loading state, feedback from the AI, current question, user inputs, and selected category. It contains event handlers for category changes, button clicks, and feedback updates. Additionally, it includes effects to scroll to the bottom when feedback or user inputs change and to perform actions dependent on category changes. The JSX renders different components based on the application state, including the Title component, AI component, TextBox component, Selection component, and ModernButton component.
 
 ```Started.jsx
-        <Grid
+    <Grid
       container
       flexDirection="column"
       sx={{
@@ -153,40 +153,42 @@ This component manages the state of the application, including whether the butto
 This backend code sets up a Flask server to handle API requests for the Interviewer AI application. It includes routes for sending questions, getting initial questions, and receiving feedback. The code manages session data to store the selected category and interacts with an external module (interviewerInterface from openai) to handle interview logic. Additionally, it serves the frontend files and clears memory periodically to maintain performance.
 
 ```app.py(flask)
-        @app.route('/api/send_question', methods=['POST'])
-@cross_origin()
-def send_question():
-    global category_storage
-    try:
-        data = request.get_json()
-        selected_category = data.get("category")
-        session['saved_category'] = selected_category
-        category_storage[session.sid] = selected_category
-        return jsonify({"initial_question": "Category saved!"})
-    except Exception as e:
-        return jsonify({"error": str(e)})
+    category_storage = {}
 
-@app.route('/api/initial_question', methods=['GET'])
-@cross_origin()
-def get_initial_question():
-    global category_storage
-    try:
-        saved_category = session.get("saved_category", "")
-        feedback, current_question = interviewerInterface("", saved_category)
-        print("Saved category from flask:", saved_category)
-        return jsonify({"initial_question": feedback, "category": saved_category, "current_question": current_question})
-    except Exception as e:
-        return jsonify({"error": str(e)})
+    @app.route('/api/send_question', methods=['POST'])
+    @cross_origin()
+    def send_question():
+        global category_storage
+        try:
+            data = request.get_json()
+            selected_category = data.get("category")
+            session['saved_category'] = selected_category
+            category_storage[session.sid] = selected_category
+            return jsonify({"initial_question": "Category saved!"})
+        except Exception as e:
+            return jsonify({"error": str(e)})
 
-@app.route('/api/feedback', methods=['POST'])
-def get_feedback():
-    global category_storage
-    try:
-        data = request.get_json()
-        user_input = data.get('user_input')
-        saved_category = session.get("saved_category", "")
-        feedback, current_question = interviewerInterface(user_input, saved_category)
-        return jsonify({"feedback": feedback, "current_question": current_question})
-    except Exception as e:
-        return jsonify({"error": str(e)})
+    @app.route('/api/initial_question', methods=['GET'])
+    @cross_origin()
+    def get_initial_question():
+        global category_storage
+        try:
+            saved_category = session.get("saved_category", "")
+            feedback, current_question = interviewerInterface("", saved_category)
+            print("Saved category from flask:", saved_category)
+            return jsonify({"initial_question": feedback, "category": saved_category, "current_question": current_question})
+        except Exception as e:
+            return jsonify({"error": str(e)})
+
+    @app.route('/api/feedback', methods=['POST'])
+    def get_feedback():
+        global category_storage
+        try:
+            data = request.get_json()
+            user_input = data.get('user_input')
+            saved_category = session.get("saved_category", "")
+            feedback, current_question = interviewerInterface(user_input, saved_category)
+            return jsonify({"feedback": feedback, "current_question": current_question})
+        except Exception as e:
+            return jsonify({"error": str(e)})
 ```
