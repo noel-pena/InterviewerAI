@@ -53,7 +53,7 @@ To run the Interviewer AI application locally, follow these steps:
 ### Backend(Python Flask)
 
 ```bash
-/InterviewerAI
+/backend
 ├── app.py # Flask routes
 ├── openai.py # Python module for interacting with OpenAI API
 ├── question.py # Module for handling interview questions
@@ -81,6 +81,8 @@ To run the Interviewer AI application locally, follow these steps:
 ```
 
 ## App Overview:
+
+### Started.jsx
 
 This component manages the state of the application, including whether the button has been clicked, loading state, feedback from the AI, current question, user inputs, and selected category. It contains event handlers for category changes, button clicks, and feedback updates. Additionally, it includes effects to scroll to the bottom when feedback or user inputs change and to perform actions dependent on category changes. The JSX renders different components based on the application state, including the Title component, AI component, TextBox component, Selection component, and ModernButton component.
 
@@ -153,6 +155,8 @@ This component manages the state of the application, including whether the butto
   )}
 </Grid>
 ```
+
+### app.py
 
 This backend code sets up a Flask server to handle API requests for the Interviewer AI application. It includes routes for sending questions, getting initial questions, and receiving feedback. The code manages session data to store the selected category and interacts with an external module (interviewerInterface from openai) to handle interview logic. Additionally, it serves the frontend files and clears memory periodically to maintain performance.
 
