@@ -2,6 +2,7 @@ import { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { SendButton } from "./SendButton";
 import axios from "axios";
+import { Grid } from "@mui/material";
 
 // eslint-disable-next-line react/prop-types
 export const TextBox = ({ onFeedback, onUserInput, onCurrentQuestion }) => {
@@ -48,35 +49,34 @@ export const TextBox = ({ onFeedback, onUserInput, onCurrentQuestion }) => {
   };
 
   return (
-    <div className="input-container">
+    <Grid container item direction="column" alignItems="center">
+      <span className="char">
+        {text.length}/{maxCharLimit}
+      </span>
+
       <form>
-        <span
-          className="char"
-          style={{
-            position: "relative",
-            top: 0,
-            left: -40,
-          }}
-        >
-          {text.length}/{maxCharLimit}
-        </span>
-        <TextareaAutosize
-          type="text"
-          name="text"
-          className="input"
-          placeholder="Type here"
-          value={text}
-          onChange={handleInputChange}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault();
-              handleSendClick(e);
-            }
-          }}
-          required
-        />
-        <SendButton onClick={(e) => handleSendClick(e)} />
+        <Grid item className="input-container">
+          <TextareaAutosize
+            type="text"
+            name="text"
+            className="input"
+            placeholder="Type here"
+            value={text}
+            onChange={handleInputChange}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleSendClick(e);
+              }
+            }}
+            required
+          />
+          <SendButton
+            onClick={(e) => handleSendClick(e)}
+            className="send-button"
+          />
+        </Grid>
       </form>
-    </div>
+    </Grid>
   );
 };

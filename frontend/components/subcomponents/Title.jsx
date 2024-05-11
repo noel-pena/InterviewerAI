@@ -8,7 +8,7 @@ export const Title = () => {
           color: "rgb(215, 215, 215)",
         }}
       >
-        <h1 style={{ padding: "1rem" }}>
+        <h1>
           Interviewer<span className="AI">AI</span>
         </h1>
         <h2>Your interviewing AI assistant</h2>

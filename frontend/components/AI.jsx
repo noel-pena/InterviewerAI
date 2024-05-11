@@ -79,9 +79,13 @@ export const AI = ({ feedback, userInputs, category, currentQuestion }) => {
           }
         >
           {item.type === "user" ? (
-            <p>{item.content}</p>
+            <p className="textstyle">{item.content}</p>
           ) : (
-            <Typewriter text={"   " + item.content} />
+            <Typewriter
+              className="textstyle"
+              text={"   " + item.content}
+              Markdown={true}
+            />
           )}
         </div>
       ))}

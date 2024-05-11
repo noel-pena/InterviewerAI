@@ -59,18 +59,16 @@ export const Started = () => {
   return (
     <Grid
       container
-      gap={3}
       flexDirection="column"
       sx={{
         justifyContent: buttonClicked ? "space-between" : "center",
         alignItems: "center",
         minHeight: "100vh",
         maxHeight: "100vh",
-        flex: 1,
         overflow: "hidden",
       }}
     >
-      <Grid item sx={{ maxHeight: buttonClicked ? "5vh" : "0" }}>
+      <Grid item sx={{ maxHeight: buttonClicked ? "0vh" : "0" }}>
         <Title />
       </Grid>
       {isLoading ? (
@@ -85,7 +83,7 @@ export const Started = () => {
             textAlign="center"
             sx={{
               height: "75vh",
-              maxHeight: "calc(75vh - 7.5rem)",
+              maxHeight: "calc(70vh - 7.5rem)",
               overflowY: "auto",
               width: "100%",
               "&::-webkit-scrollbar": {
@@ -112,14 +110,14 @@ export const Started = () => {
         </>
       ) : (
         <>
-          <Grid item>
+          <Grid item pt={2}>
             <Selection
               onCategoryChange={handleCategoryChange}
               selectedCategory={category}
             />
           </Grid>
           {category && (
-            <Grid item pt={2}>
+            <Grid item pt={3}>
               <ModernButton onClick={handleButtonClick} />
             </Grid>
           )}

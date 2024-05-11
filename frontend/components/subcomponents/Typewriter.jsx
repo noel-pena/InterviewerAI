@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
 
 const useTypewriter = (text, speed = 5) => {
   const [displayText, setDisplayText] = useState("");
@@ -24,8 +25,12 @@ const useTypewriter = (text, speed = 5) => {
   return displayText;
 };
 
-export const Typewriter = ({ text, speed, style }) => {
+export const Typewriter = ({ text, speed, style, Markdown }) => {
   const displayText = useTypewriter(text, speed);
 
-  return <p style={style}>{displayText}</p>;
+  return Markdown ? (
+    <ReactMarkdown style={style}>{displayText}</ReactMarkdown>
+  ) : (
+    <p style={style}>{displayText}</p>
+  );
 };
