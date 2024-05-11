@@ -83,7 +83,7 @@ export const Started = () => {
             textAlign="center"
             sx={{
               height: "75vh",
-              maxHeight: "calc(70vh - 7.5rem)",
+              maxHeight: "calc(80vh - 7.5rem)",
               overflowY: "auto",
               width: "100%",
               "&::-webkit-scrollbar": {
@@ -100,7 +100,7 @@ export const Started = () => {
               category={category}
             />
           </Grid>
-          <Grid item pt={5}>
+          <Grid item pt={2}>
             <TextBox
               onCurrentQuestion={handleCurrentQuestion}
               onFeedback={handleFeedback}

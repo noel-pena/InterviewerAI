@@ -69,7 +69,7 @@ h2 {
 .output {
   font-size: 1.15rem;
   padding: 7rem 3.125rem;
-  font-weight: 300;
+  font-weight: inherit;
   --fade-length: 7rem;
   --fade-start: 90%;
   -webkit-mask-image: linear-gradient(
@@ -264,7 +264,7 @@ h2 {
 }
 .svg-icon {
   color: #e7e7e7;
-  margin-right: 0.3125rem;
+  margin-right: 0.6rem;
   cursor: pointer;
   transition: color 0.4s ease-in-out !important;
   position: fixed;
@@ -272,7 +272,7 @@ h2 {
   bottom: 68%;
   transform: translateY(50%);
 }
-@media (max-width: 47rem) {
+@media (max-width: 48rem) {
   .svg-icon {
     height: auto;
     right: 5%;
@@ -284,6 +284,7 @@ h2 {
   color: #589f55;
 }
 ::placeholder {
+  padding-top: 0.2rem;
   font-size: 0.9rem;
   font-family: Inter, sans-serif;
   font-style: normal;
@@ -357,7 +358,7 @@ textarea {
   max-width: 60%;
   min-width: 3.125rem;
 }
-@media (max-width: 26rem) {
+@media (max-width: 47rem) {
   .AI-responses,
   .user-responses,
   .AI-question {
@@ -365,12 +366,12 @@ textarea {
     margin: 0.5rem;
   }
 }
-.AI-responses,
+/* .AI-responses,
 .user-responses,
 .AI-question {
   --r: 0.75rem;
   --t: 0.75rem;
-  padding: calc(1 * var(--r) / 4);
+  padding: calc(1 * var(--r) / 2);
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   -webkit-mask: radial-gradient(
@@ -384,13 +385,13 @@ textarea {
     radial-gradient(50% 50%, #000 98%, #0000 101%) 0 0 / var(--r) var(--r) space
       padding-box;
   background: linear-gradient(135deg, #1c1c1cad, #2020207d) border-box;
-}
+} */
 .AI-responses,
 .AI-question {
   background: #434642;
-  --_d: 0%;
+  /* --_d: 0%;
   border-left: var(--t) solid #0000;
-  margin-right: var(--t);
+  margin-right: var(--t); */
   place-self: start;
   margin-right: auto;
 }
@@ -402,9 +403,9 @@ textarea {
 }
 .user-responses {
   background: #589f55;
-  --_d: 100%;
+  /* --_d: 100%;
   border-right: var(--t) solid #0000;
-  margin-left: var(--t);
+  margin-left: var(--t); */
   place-self: end;
   margin-left: auto;
 }
@@ -449,7 +450,6 @@ textarea {
     width: 10rem;
   }
 }
-
 .text-style {
   padding: 2rem;
 }

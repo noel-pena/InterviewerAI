@@ -71,10 +71,7 @@ export const TextBox = ({ onFeedback, onUserInput, onCurrentQuestion }) => {
             }}
             required
           />
-          <SendButton
-            onClick={(e) => handleSendClick(e)}
-            className="send-button"
-          />
+          <SendButton onClick={(e) => handleSendClick(e)} />
         </Grid>
       </form>
     </Grid>
