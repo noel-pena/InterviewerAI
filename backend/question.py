@@ -338,6 +338,33 @@ def get_random_question(category):
             "What are some best practices for writing Java documentation comments?",
             "How do you handle error logging and monitoring in a Java application?",
             "What are some techniques for optimizing memory usage in a Java application?"
-        ]
+        ],
+        "Kotlin": [
+            "What is Kotlin and how does it differ from Java?",
+            "What is a data class in Kotlin?",
+            "What is the difference between 'val' and 'var' in Kotlin?",
+            "How does Kotlin handle null safety?",
+            "Explain the concept of extension functions in Kotlin.",
+            "What are Kotlin’s higher-order functions and how are they used?",
+            "What is a sealed class in Kotlin and when would you use it?",
+            "Explain Kotlin’s delegation pattern and how it works.",
+            "What are coroutines in Kotlin and how do they differ from traditional threading?",
+            "How does Kotlin support functional programming?",
+            "What are Kotlin’s type aliases and how can they be used?",
+            "Explain the use of the 'inline' keyword in Kotlin.",
+            "What is the difference between 'apply', 'run', 'with', 'let', and 'also' in Kotlin?",
+            "How does Kotlin’s type system handle variance (covariance and contravariance)?",
+            "What are Kotlin’s 'object' declarations and how are they different from classes?",
+            "How do you use Kotlin’s `when` expression and how is it different from a `switch` statement in Java?",
+            "What is the purpose of the `companion object` in Kotlin?",
+            "How can you define and use custom annotations in Kotlin?",
+            "What are `sealed interfaces` and how do they differ from `sealed classes`?",
+            "How does Kotlin handle generics and what are some common pitfalls?",
+            "What is the difference between `lazy` and `lateinit` properties in Kotlin?",
+            "How can you create and use custom DSLs (domain-specific languages) in Kotlin?",
+            "Explain the role of `reified` type parameters in Kotlin's generics.",
+            "What are `suspend` functions and how do they fit into Kotlin's coroutine model?",
+            "How does Kotlin handle interoperability with Java, and what are some challenges that might arise?"
+        ],
     }
     return random.choice(questions.get(category, []))

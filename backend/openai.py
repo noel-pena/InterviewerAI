@@ -32,7 +32,6 @@ def interviewerInterface(user_input, category):
             max_tokens=2040,
             temperature=0.1,
         )
-        print("Received cat:", category)
         feedback = completion.choices[0].message.content
         
         if completion.choices[0].message.role == "assistant":
@@ -40,8 +39,6 @@ def interviewerInterface(user_input, category):
         if completion.choices[0].message.role == "assistant":
             current_question = initial_question
             initial_question = None
-
-        print(f"init: {initial_question}, current: {current_question}")
         return feedback, current_question
     except Exception as e:
         print("Error in interviewerInterface:", e) 

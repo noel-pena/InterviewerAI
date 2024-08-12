@@ -19,7 +19,6 @@ category_storage = {}
 def clear_memory():
     try:
         gc.collect()
-        print("Memory cleared")
     except Exception as e:
         print({"error": str(e)}), 500
 
@@ -43,7 +42,6 @@ def get_initial_question():
     try:
         saved_category = session.get("saved_category", "")
         feedback, current_question = interviewerInterface("", saved_category)
-        print("Saved category from flask:", saved_category)
         return jsonify({"initial_question": feedback, "category": saved_category, "current_question": current_question})
     except Exception as e:
         return jsonify({"error": str(e)})
@@ -64,7 +62,6 @@ def get_feedback():
 def index():
     global category_storage
     clear_memory()
-    print("Category storage:", category_storage)  
     return send_from_directory("dist", "index.html")
 
 @app.route("/assets/<path:filename>")

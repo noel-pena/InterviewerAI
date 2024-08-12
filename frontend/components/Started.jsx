@@ -48,13 +48,6 @@ export const Started = () => {
     scrollToBottom();
   }, [feedback, userInputs]);
 
-  useEffect(() => {
-    if (category !== "") {
-      // Perform actions here that need the updated category value
-      console.log("Category updated:", category);
-    }
-  }, [category]);
-
   const handleUserInputs = () => {};
   return (
     <Grid

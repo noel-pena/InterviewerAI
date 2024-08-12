@@ -20,7 +20,6 @@ export const AI = ({ feedback, userInputs, category, currentQuestion }) => {
               withCredentials: false,
             }
           );
-          console.log("This is the read cat:", res.data);
           setInitialQuestion(res.data.current_question);
           setInitialQuestionFetched(true);
         } catch (error) {
