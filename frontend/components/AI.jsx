@@ -55,17 +55,14 @@ export const AI = ({ feedback, userInputs, category, currentQuestion }) => {
 
   return (
     <div className="container1">
-      {/* Display loading indicator if fetching initial question */}
       {loading && <p>Loading...</p>}
 
-      {/* Render initial question when not loading */}
       {!loading && (
         <div className="AI-responses">
           <Typewriter text={"   " + initialQuestion} />
         </div>
       )}
 
-      {/* Render combined inputs */}
       {combinedArray.map((item, index) => (
         <div
           key={index}

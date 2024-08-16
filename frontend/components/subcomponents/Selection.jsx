@@ -16,7 +16,7 @@ export const Selection = ({ onCategoryChange, selectedCategory }) => {
           const response = await axios.post("/api/send_question", {
             category: selectedCategory,
           });
-          console.log("Response1:", response.data); // Log the response from the backend
+          console.log("Response1:", response.data);
         } catch (error) {
           console.error("Error fetching initial question:", error);
         }
@@ -32,17 +32,36 @@ export const Selection = ({ onCategoryChange, selectedCategory }) => {
         onChange={handleCategoryChange}
         value={selectedCategory}
       >
-        <option value="" disabled>
+        <option label="Select a Category" value="" disabled>
           Select a category
         </option>
-        <option value="General">General</option>
-        <option value="JavaScript">JavaScript</option>
-        <option value="SQL">SQL</option>
-        <option value="Computer Science">Computer Science</option>
-        <option value="React.js">React.js</option>
-        <option value="Python">Python</option>
-        <option value="Java">Java</option>
-        <option value="Data Structures">Data Structures</option>
+        <option label="General" value="General">
+          General
+        </option>
+        <option label="JavaScript" value="JavaScript">
+          JavaScript
+        </option>
+        <option label="SQL" value="SQL">
+          SQL
+        </option>
+        <option label="Computer Science" value="Computer Science">
+          Computer Science
+        </option>
+        <option label="React.js" value="React.js">
+          React.js
+        </option>
+        <option label="Python" value="Python">
+          Python
+        </option>
+        <option label="Java" value="Java">
+          Java
+        </option>
+        <option label="Data Structures" value="Data Structures">
+          Data Structures
+        </option>
+        <option label="Kotlin" value="Kotlin">
+          Kotlin
+        </option>
       </select>
     </>
   );

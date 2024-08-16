@@ -41,7 +41,6 @@ export const TextBox = ({ onFeedback, onUserInput, onCurrentQuestion }) => {
       onFeedback(feedback, text);
       onCurrentQuestion(currentQuestion);
       onUserInput(userInputs.concat(text));
-      console.log(`feedback: ${feedback}, currentQuestion: ${currentQuestion}`);
       setText("");
     } catch (error) {
       console.error("Error fetching data:", error);
