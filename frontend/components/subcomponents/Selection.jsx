@@ -56,7 +56,7 @@ export const Selection = ({ onCategoryChange, selectedCategory }) => {
         <option label="Python" value="Python">
           Python
         </option>
-        <option label="Java" value="Java">
+        <option label="Java" value="Java">t
           Java
         </option>
         <option label="Data Structures" value="Data Structures">
