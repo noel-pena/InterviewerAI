@@ -366,5 +366,27 @@ def get_random_question(category):
             "What are `suspend` functions and how do they fit into Kotlin's coroutine model?",
             "How does Kotlin handle interoperability with Java, and what are some challenges that might arise?"
         ],
+        "TypeScript": [
+            "What is TypeScript, and how does it differ from JavaScript?",
+            "Explain how TypeScript handles types compared to JavaScript.",
+            "What are the benefits of using TypeScript in a project?",
+            "How do you declare a variable in TypeScript with a specific type?",
+            "What is the 'any' type in TypeScript, and when would you use it?",
+            "Explain the difference between 'interface' and 'type' in TypeScript.",
+            "How do you create a Union type in TypeScript, and what is its use case?",
+            "What are TypeScript generics, and why are they useful?",
+            "Explain how TypeScript's 'never' type works and provide an example.",
+            "How does TypeScript's 'readonly' modifier work?",
+            "What are TypeScript decorators, and how are they used?",
+            "Describe how to set up a TypeScript project with strict type-checking.",
+            "How do you handle module resolution in TypeScript?",
+            "What are TypeScript enums, and when would you use them?",
+            "How does TypeScript infer types, and how can you override this behavior?",
+            "What is a 'mapped type' in TypeScript, and how would you create one?",
+            "Explain how 'type guards' work in TypeScript.",
+            "How would you migrate a large JavaScript project to TypeScript?",
+            "What is the difference between 'public', 'private', and 'protected' in TypeScript?",
+            "How does TypeScript's 'Partial<T>' utility type work?"
+        ]
     }
     return random.choice(questions.get(category, []))
